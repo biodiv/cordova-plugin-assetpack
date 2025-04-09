@@ -1,0 +1,29 @@
+{
+"name": "cordova-plugin-assetpack",
+"version": "0.1.0",
+"description": "Cordova plugin to support Play Asset Delivery (asset packs) in Android builds.",
+"keywords": [
+    "cordova",
+    "cordova-android",
+    "plugin",
+    "assetpack",
+    "play-asset-delivery",
+    "google-play"
+],
+"author": "Thomas Uher",
+"license": "Apache-2.0",
+"cordova": {
+    "id": "cordova-plugin-assetpack",
+    "platforms": [
+    "android"
+    ]
+},
+"repository": {
+    "type": "git",
+    "url": "https://github.com/biodiv/cordova-plugin-assetpack.git"
+},
+"bugs": {
+    "url": "https://github.com/biodiv/cordova-plugin-assetpack/issues"
+},
+"homepage": "https://github.com/biodiv/cordova-plugin-assetpack"
+}

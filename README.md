@@ -20,12 +20,16 @@ See the [Play Asset Delivery Doc](https://developer.android.com/guide/playcore/a
 
 Once the plugin is installed, simply place your large assets in the `www/asset_pack` directory. During the build process, the assets will be automatically moved to the correct location for Play Asset Delivery.
 
+## Packaging
+
+Play Asset Delivery is not compatible with `.apk` builds. It only works with `.aab`. Make sure to build `.aab` files when using this plugin. Use [bundletool](https://github.com/google/bundletool/releases) for testing `.aab` files.
+
 ## Uninstall
 
 To remove the plugin, run:
 
 ```bash
-cordova plugin remove cordova-plugin-assetpack
+cordova plugin rm cordova-plugin-assetpack
 ```
 
 The plugin will clean up all modifications (such as removing asset references in `project.properties` and `build.gradle`) during uninstallation.
