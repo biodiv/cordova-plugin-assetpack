@@ -58,7 +58,3 @@ The plugin will clean up all modifications (such as removing asset references in
 ## Contributing
 
 Feel free to submit issues, bugs, or improvements. Pull requests are welcome!
-
-## License
-
-This plugin is licensed under the Apache License 2.0.
