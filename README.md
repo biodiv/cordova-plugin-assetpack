@@ -44,9 +44,7 @@ To modify the asset pack path, you can define the path using the `<preference>` 
 
 ```xml
 <platform name="android">
-    <plugin name="cordova-plugin-assetpack" spec="^0.1.0">
-        <variable name="AssetPackSourcePath" value="myassetspath/folder/" />
-    </plugin>
+    <preference name="AssetPackSourcePath" value="myassetspath/folder/" />
 </platform>
 ```
 
