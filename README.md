@@ -26,8 +26,6 @@ You can reference your asset_pack files like this:
 <img src="/asset_pack/your-image.jpg" alt="Your Image" />
 ```
 
-Here's the updated documentation with the path configured as `myassetspath/folder/`:
-
 ## Modify Asset Pack Path
 
 ### Overview
