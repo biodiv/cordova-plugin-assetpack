@@ -26,6 +26,44 @@ You can reference your asset_pack files like this:
 <img src="/asset_pack/your-image.jpg" alt="Your Image" />
 ```
 
+Here's the updated documentation with the path configured as `myassetspath/folder/`:
+
+## Modify Asset Pack Path
+
+### Overview
+
+By default, the Cordova Plugin for Play Asset Delivery uses the `asset_pack` directory in the `www` folder for storing assets that will be included in the install-time asset pack. However, you can customize this directory path to better fit your project's structure.
+
+This feature allows you to configure the path for the asset pack in the `config.xml` file, giving you flexibility to organize your assets as needed.
+
+### How to Configure
+
+To modify the asset pack path, you can define the path using the `<preference>` tag in your `config.xml` file. The path should be relative to the `www` folder in your Cordova project.
+
+#### Example Configuration
+
+```xml
+<platform name="android">
+    <plugin name="cordova-plugin-assetpack" spec="^0.1.0">
+        <variable name="AssetPackSourcePath" value="myassetspath/folder/" />
+    </plugin>
+</platform>
+```
+
+### Explanation
+
+- **`AssetPackSourcePath`**: This preference defines the relative path to the folder containing the assets you want to include in the install-time asset pack. 
+    - Example: `"myassetspath/folder/"` would use the `www/myassetspath/folder/` directory for the assets.
+
+### Default Behavior
+
+If the `AssetPackSourcePath` preference is not defined in the `config.xml` file, the plugin will default to using `www/asset_pack`.
+
+### Important Notes
+
+- **Reinstall the Plugin**: If you change the `AssetPackSourcePath` in your `config.xml`, you will need to uninstall and reinstall the plugin for the changes to take effect.
+- **Asset Directory Structure**: Ensure that the directory structure exists under the `www` folder. If it does not exist, the plugin will fall back to the default `asset_pack` directory.
+
 ## Packaging
 
 Play Asset Delivery is not compatible with `.apk` builds. It only works with `.aab`. Make sure to build `.aab` files when using this plugin. Use [bundletool](https://github.com/google/bundletool/releases) for testing `.aab` files.

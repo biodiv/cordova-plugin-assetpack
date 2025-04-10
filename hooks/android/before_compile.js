@@ -1,13 +1,16 @@
 const fs = require('fs');
 const path = require('path');
+const ConfigParser = require('cordova-common').ConfigParser;
 
 module.exports = function (context) {
     const projectRoot = context.opts.projectRoot;
     const platformRoot = path.join(projectRoot, 'platforms', 'android');
 
-    // Corrected source path with the 'www' directory included
-    const sourceDir = path.join(platformRoot, 'app', 'src', 'main', 'assets', 'www', 'asset_pack');
-    const targetDir = path.join(platformRoot, 'InstallTimeAssetPack', 'src', 'main', 'assets', 'www', 'asset_pack');
+    // Source path with the 'www' directory included
+    const assetPackSourcePath = getAssetPackSourcePath(projectRoot);
+    const sourceSubPath = assetPackSourcePath.split('/');
+    const sourceDir = path.join(platformRoot, 'app', 'src', 'main', 'assets', 'www', ...sourceSubPath);
+    const targetDir = path.join(platformRoot, 'InstallTimeAssetPack', 'src', 'main', 'assets', 'www', ...sourceSubPath);
 
     try {
         if (!fs.existsSync(sourceDir)) {
@@ -36,6 +39,33 @@ module.exports = function (context) {
         console.error(`[AssetPack Plugin] Error during asset pack move: ${error.message}`);
     }
 };
+
+// Function to get the asset pack source path from config.xml
+function getAssetPackSourcePath(projectRoot) {
+    const configXmlPath = path.join(projectRoot, 'config.xml');
+
+    // Check if the config.xml exists
+    if (!fs.existsSync(configXmlPath)) {
+        console.error('[AssetPack Plugin] config.xml not found!');
+        return 'asset_pack'; // Default value
+    }
+
+    try {
+        const config = new ConfigParser(configXmlPath);
+        const preference = config.getPreference('AssetPackSourcePath', 'android');
+        
+        if (preference) {
+            console.log(`[AssetPack Plugin] AssetPackSourcePath preference: ${preference}`);
+            return preference;
+        } else {
+            console.log('[AssetPack Plugin] AssetPackSourcePath preference not found. Using default "asset_pack".');
+            return 'asset_pack'; // Default fallback
+        }
+    } catch (error) {
+        console.error('[AssetPack Plugin] Error reading config.xml:', error);
+        return 'asset_pack'; // Default fallback
+    }
+}
 
 // Recursively move directory content
 function moveRecursiveSync(src, dest) {
